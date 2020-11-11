@@ -10,6 +10,23 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const writeFileAsync = util.promisify(fs.writeFile);
+
+const employeesArr =[]
+ 
+function managerQuestions() {
+    inquirer 
+
+     .prompt([
+         {
+             type: `input`,
+             name: `nameManager`,
+             message: "Managers first and last name:",
+             validate: validateNameManager
+         },
+
+     ])
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
