@@ -8,11 +8,11 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+const render = require("./lib/htmlrender");
 
-const writeFileAsync = util.promisify(fs.writeFile);
+//const writeFileAsync = util.promisify(fs.writeFile);
 
-const employeesArr =[]
+const employeeArray =[]
  
 function managerQuestions() {
     inquirer 
@@ -20,13 +20,35 @@ function managerQuestions() {
      .prompt([
          {
              type: `input`,
-             name: `nameManager`,
-             message: "Managers first and last name:",
-             validate: validateNameManager
-         },
-
-     ])
+             name: `name`,
+             message: "What is your name:",
+          },
+          {
+              type:"input",
+              name:"id",
+              message:"What is your ID?"
+          },
+          {
+              type:"input",
+              name:"email",
+              message:"What is your email?"
+          },
+          {
+              type:"input",
+              name :"officeNumber",
+              message:"What is your office number?"
+          },
+     ]).then(response => {
+        const manager= new Manager(response.name,response.id, response.email,response.officeNumber);
+        employeeArray.push(manager);  
+        console.log (manager)   
+     })
 }
+
+managerQuestions()
+
+
+// class def. for intern and engineer - write functions that asks user type of employee  to create 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
